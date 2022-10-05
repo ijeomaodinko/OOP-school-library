@@ -2,13 +2,14 @@ require './nameable'
 require './capitalize_decorator'
 require './trimmer_decorator'
 
-class Person
+class Person < Nameable
   # the getters and setters accessor
   attr_reader :id
   attr_accessor :name, :age
 
   # constructor to initialize the class with instance varibles
   def initialize(age, name = 'Unknown', parent_permission: true)
+    super()
     @id = Random.rand(1..1000)
     @name = name
     @age = age

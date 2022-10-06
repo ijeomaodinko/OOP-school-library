@@ -5,11 +5,11 @@ require './rental'
 
 class Person < Nameable
   # the getters and setters accessor
-  attr_reader :id, 
+  attr_reader :id
   attr_accessor :name, :age, :rental
 
   # constructor to initialize the class with instance varibles
-  def initialize(age, name = 'Unknown', parent_permission: true, rental)
+  def initialize(age, name = 'Unknown', parent_permission: true)
     super()
     @id = Random.rand(1..1000)
     @name = name

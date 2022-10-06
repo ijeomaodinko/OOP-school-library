@@ -6,12 +6,12 @@ class Student < Person
     super(age, name, parent_permission)
     @classroom = classroom
   end
-  
+
   def play_hooky
     "¯\(ツ)/¯"
   end
 
-  def classroom(classroom)
+  def add_classroom(classroom)
     classroom.students.push(self) unless classroom.students.include?(self)
   end
 end

@@ -21,8 +21,8 @@ class Person < Nameable
   def can_use_services?
     of_age? || @parent_permission
   end
-  
-  def rent_book (book, date, person)
+
+  def rent_book(book, date, person)
     Rental.new(book, date, person)
   end
 

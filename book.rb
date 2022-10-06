@@ -1,24 +1,24 @@
 require './rental'
 
-class Book 
-attr_accessor :title, :author
-attr_reader :rental
+class Book
+  attr_accessor :title, :author
+  attr_reader :rental
 
-    def initialize (title, author, rental)
-        @title = title
-        @author = author 
-        @rentals = rentals
-    end 
+  def initialize(title, author, _rental)
+    @title = title
+    @author = author
+    @rental = []
+  end
 
-    def belong_to (Book)
-        @rentals.member?(Book)
-    end 
+  def belong_to(book)
+    @rental.member?(book)
+  end
 
-    def has_many(rental)
-        @book.belong_to?(rentals)
-    end
+  def hasmany(_rental)
+    @book.belong_to?(rentals)
+  end
 
-    def rent_book (date, person)
-        Rental.new(date, person)
-    end
+  def rent_book(date, person)
+    Rental.new(date, person)
+  end
 end

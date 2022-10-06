@@ -2,17 +2,14 @@ class Classroom
   attr_accessor :label
   attr_reader :students
 
-  def initialize(label, _students)
+  def initialize(label, students)
     @label = label
     @students = []
   end
 
-  def hasmany(student)
-    @students.push(student)
-    student.classroom
+  def add_student(student)
+    @students << student
+    student.classroom = self
   end
 end
 
-def belong_to(classroom)
-  @students.member?(classroom)
-end

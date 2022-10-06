@@ -1,8 +1,7 @@
 require './rental'
 
 class Book
-  attr_accessor :title, :author
-  attr_reader :rental
+  attr_accessor :title, :author, :rental
 
   def initialize(title, author, _rental)
     @title = title
@@ -10,15 +9,7 @@ class Book
     @rental = []
   end
 
-  def belong_to(book)
-    @rental.member?(book)
-  end
-
-  def hasmany(_rental)
-    @book.belong_to?(rentals)
-  end
-
-  def rent_book(date, person)
-    Rental.new(date, person)
+  def add_rental(person, date)
+    Rental.new(date,self, person)
   end
 end

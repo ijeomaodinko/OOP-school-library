@@ -3,7 +3,7 @@ require './rental'
 class Book
   attr_accessor :title, :author, :rental
 
-  def initialize(title, author, _rental)
+  def initialize(title, author, rental)
     @title = title
     @author = author
     @rental = []

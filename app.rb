@@ -14,7 +14,7 @@ def initialize
 end 
 
 #to list books 
-    def list_book 
+    def list_books
         if @books.length == 0
             puts "There are no books"
         else
@@ -53,6 +53,7 @@ end
         puts "Person created successfully \n"
     end
 
+#to create book
     def create_book
         print "Title"
         title = gets.chomp
@@ -62,6 +63,7 @@ end
         puts "Book created successfully \n"
     end
 
+    #to create rental
     def create_rental
         puts "Select a book from the following list by number"
         @books.each_with_index{|book, index| puts "#{index}) Title: \"#{book.title}\",  Author: #{book.author}"}
@@ -77,7 +79,8 @@ end
         puts "Rental created successfully \n\n"
     end
 
-    def list_rentals
+# to create list of rental by id
+    def list_rentals_by_id
         print 'ID of person'
         id = gets.chomp
         person = nil
@@ -90,4 +93,5 @@ end
         end  
         end  
     end    
+end 
 end

@@ -16,11 +16,8 @@ class App
 
   # to list books
   def list_books
-    if @books.length.zero?
-      puts 'There are no books'
-    else
-      @books.each_with_index { |_id, _book| puts " id: {id} Title: #{title}n/n author: {author}" }
-    end
+    puts 'There are no books' if @books.empty?
+    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
   end
 
   # to list all people
@@ -56,7 +53,7 @@ class App
       puts 'Has parent permission?[Y/N]:'
       permission = gets.chomp.capitalize
       new_student = Student.new('unknown', age, name, permission)
-      @student << new_student
+      @people << new_student
     when 2
       puts 'specialization:'
       specialization = gets.chomp
@@ -79,35 +76,29 @@ class App
 
   # to create rental
   def create_rental
-    puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index}) Title: \"#{book.title}\",  Author: #{book.author}" }
-    book_number = gets.chomp.to_i
-    puts 'Select a person from the following by no ID'
-    people = [*@teacher, *@student]
-    new_rental = Rental.new(date, @books[book], people[person])
-    @rentals.push(new_rental)
-    person_number = gets.chomp.to_i
-    puts 'Date:'
-    date = gets.chomp
-    @rentals << Rental.new(date, @people[person_number], @books[book_number])
+    book_id = gets.chomp.to_i
+    @people.each_with_index do |person, index|
+      puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+    person_id = gets.chomp.to_i
+    print 'Date: '
+    date = gets.chomp.to_s
+    rental = Rental.new(date, @people[person_id], @books[book_id])
+    @rentals << rental
     puts "Rental created successfully \n\n"
   end
 
   # to create list of rental by id
   def list_rentals_by_id
     print 'ID of person: '
-    id = gets.chomp.to_i
-    person = nil
-    @people.each { |p| person = p if p.id == id }
-    if person.nil?
-      puts "There is not person with the id #{id} registered"
-    elsif person.rentals.length.zero?
-      puts "Person #{id}: #{person.name} doesn't have rentals"
-    else
-      puts 'Rentals:'
-      person.rentals.each do |rental|
-        puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
+    person_id = gets.chomp
+    puts 'Rentals: '
+    @rentals.each do |rental|
+      if rental.person.id.to_s == person_id.to_s
+        puts "#{rental.class} #{rental.date} | Book: \"#{rental.book.title}\" rented by #{rental.person.name}"
       end
     end
+    puts ''
   end
 end

@@ -8,9 +8,7 @@ require './teacher'
 class App
   def initialize
     @books = []
-    @student = []
     @people = []
-    @teacher = []
     @rentals = []
   end
 
@@ -58,7 +56,7 @@ class App
       puts 'specialization:'
       specialization = gets.chomp
       new_teacher = Teacher.new(specialization, age, name)
-      @teacher << new_teacher
+      @people << new_teacher
     end
     puts "Person created successfully \n"
   end

@@ -8,7 +8,9 @@ require './teacher'
 class App
   def initialize
     @books = []
+    @student = []
     @people = []
+    @teacher = []
     @rentals = []
   end
 
@@ -23,10 +25,10 @@ class App
 
   # to list all people
   def list_people
-    if @person.length.zero?
-      puts 'There are no books'
+    if @people.length.zero?
+      puts 'There are no people'
     else
-      @person.each_with_index do |person, id|
+      @people.each_with_index do |person, id|
         puts " #{id}: {person.id} name: #{person.name}n/n age: {age}"
       end
     end
@@ -52,12 +54,14 @@ class App
     case person_type
     when 1
       puts 'Has parent permission?[Y/N]:'
-      permission = gets.chomps.capitalize
-      @people << Student.new('unknown', age, name, permission)
+      permission = gets.chomp.capitalize
+      new_student = Student.new('unknown', age, name, permission)
+      @student << new_student
     when 2
       puts 'specialization:'
-      specialization = gets.chomp.uppercase
-      teacher << Teacher.new(specialization, age, name)
+      specialization = gets.chomp
+      new_teacher = Teacher.new(specialization, age, name)
+      @teacher << new_teacher
     end
     puts "Person created successfully \n"
   end
@@ -68,7 +72,8 @@ class App
     title = gets.chomp
     print 'Author'
     author = gets.chomp
-    @books << Books.new(title, author)
+    new_books = Book.new(title, author)
+    @books << new_books
     puts "Book created successfully \n"
   end
 
@@ -78,12 +83,12 @@ class App
     @books.each_with_index { |book, index| puts "#{index}) Title: \"#{book.title}\",  Author: #{book.author}" }
     book_number = gets.chomp.to_i
     puts 'Select a person from the following by no ID'
-    @people.each_with_index do |person, index|
-      puts "#{index}) [#{person.class}] Name: #{person.name} ID: #{person.id}, Age: #{person.age}"
-    end
-    person_number = gets.chomps.to_i
+    people = [*@teacher, *@student]
+    new_rental = Rental.new(date, @books[book], people[person])
+    @rentals.push(new_rental)
+    person_number = gets.chomp.to_i
     puts 'Date:'
-    date = gets.chomps
+    date = gets.chomp
     @rentals << Rental.new(date, @people[person_number], @books[book_number])
     puts "Rental created successfully \n\n"
   end

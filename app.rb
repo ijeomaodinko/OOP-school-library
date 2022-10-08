@@ -24,19 +24,12 @@ class App
       puts 'There are no people'
     else
       @people.each_with_index do |person, id|
-        puts " #{id}: [#{person.class}] name: #{person.name}  age: {age}"
+        puts " #{id}: [#{person.class}] name: #{person.name}  age: #{age}"
       end
     end
   end
 
   # to create a person
-  def add_student(student)
-    @people << student
-  end
-
-  def add_teacher(teacher)
-    @people << teacher
-  end
 
   def create_person
     puts 'Do you want to create a student(1) or a teacher(2)?'

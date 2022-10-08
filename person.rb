@@ -9,7 +9,7 @@ class Person < Nameable
   attr_accessor :name, :age, :rental
 
   # constructor to initialize the class with instance varibles
-  def initialize(age, name = 'Unknown', parent_permission: true)
+  def initialize(age, parent_permission, name = 'Unknown')
     super()
     @id = Random.rand(1..1000)
     @name = name
@@ -22,7 +22,7 @@ class Person < Nameable
     of_age? || @parent_permission
   end
 
-  def rent_book(book, date, person)
+  def add_rental(book, date, person)
     Rental.new(book, date, person)
   end
 
@@ -38,9 +38,9 @@ class Person < Nameable
   end
 end
 
-person = Person.new(22, 'maximilianus')
-person.correct_name
-capitalized_person = CapitalizeDecorator.new(person)
-capitalized_person.correct_name
-capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
-capitalized_trimmed_person.correct_name
+# person = Person.new(22, 'maximilianus')
+# person.correct_name
+# capitalized_person = CapitalizeDecorator.new(person)
+# capitalized_person.correct_name
+# capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
+# capitalized_trimmed_person.correct_name

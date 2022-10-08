@@ -24,7 +24,7 @@ class App
       puts 'There are no people'
     else
       @people.each_with_index do |person, id|
-        puts " #{id}: {person.id} name: #{person.name}n/n age: {age}"
+        puts " #{id}: [#{person.class}] name: #{person.name}  age: {age}"
       end
     end
   end
@@ -74,8 +74,10 @@ class App
 
   # to create rental
   def create_rental
+    puts 'Select a book from the following list by number'
     @books.each_with_index { |book, index| puts "#{index}) Title: \"#{book.title}\",  Author: #{book.author}" }
     book_id = gets.chomp.to_i
+    puts 'Select a Person from the following list by number (not ID)'
     @people.each_with_index do |person, index|
       puts "#{index}) [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
@@ -97,6 +99,5 @@ class App
         puts "#{rental.class} #{rental.date} | Book: \"#{rental.book.title}\" rented by #{rental.person.name}"
       end
     end
-    puts ''
   end
 end

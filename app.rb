@@ -95,15 +95,19 @@ class App
 
   # to create list of rental by id
   def list_rentals_by_id
-    print 'ID of person'
-    id = gets.chomp
+    print 'ID of person: '
+    id = gets.chomp.to_i
     person = nil
-    @rental.each { |p| person = p if p.id == id }
-    puts 'Rentals: '
-    if rental.person.id.to_s == id.to_s
-      puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
+    @people.each { |p| person = p if p.id == id }
+    if person.nil?
+      puts "There is not person with the id #{id} registered"
+    elsif person.rentals.length.zero?
+      puts "Person #{id}: #{person.name} doesn't have rentals"
     else
-      puts "There is no person with the id \"#{id}\" registered"
+      puts 'Rentals:'
+      person.rentals.each do |rental|
+        puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
+      end
     end
   end
 end
